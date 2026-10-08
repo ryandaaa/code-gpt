@@ -249,3 +249,23 @@ html{scrollbar-color:var(--black) var(--canvas);scrollbar-width:thin}
 .section-panel .page-wrap{width:min(1200px,calc(100% - 40px))}
 .section-panel.hero-panel,.section-panel.rooms-panel,.section-panel.visit-panel{background:var(--canvas)}
 .section-panel.visit-panel{background:var(--white)}
+
+/* Final panel geometry: full-width surfaces, constrained content, no nested container squeeze. */
+.site-stage{padding:0 8px 10px;gap:10px}
+.section-panel{width:100%;max-width:none;margin:0;box-sizing:border-box}
+.hero-panel{padding-inline:clamp(28px,5vw,88px)}
+.rooms-panel{padding-inline:clamp(28px,5vw,88px)}
+.hero-panel.hero,.rooms-panel.section{width:100%;max-width:none}
+.hero-panel.hero{min-height:740px}
+.rooms-panel .section-intro,.rooms-panel .room-grid,.rooms-panel .selection-note{width:min(1200px,100%);max-width:1200px;margin-left:auto;margin-right:auto}
+.rooms-panel .section-intro{margin-bottom:46px}
+.rooms-panel .room-grid{padding:0}
+.rooms-panel .selection-note{display:flex}
+.notes-panel .dark-inner{width:min(1200px,calc(100% - 40px))}
+.visit-panel{padding:0 clamp(12px,2vw,28px)}
+.visit-panel .visit-card{width:min(1200px,100%);margin-inline:auto}
+
+@media (max-width:860px){
+  .hero-panel,.rooms-panel{padding-inline:20px}
+  .hero-panel.hero{min-height:0}
+}
