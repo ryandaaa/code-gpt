@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A fictional editorial landing page for Common Ground.">
+  <title>Common Ground — Rooms for ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Mono:wght@400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body x-data="{ menu:false, activeRoom:'The Long Table', email:'', sent:false }" class="min-h-screen overflow-x-hidden">
+  <header class="site-header">
+    <div class="nav-shell">
+      <a href="#top" class="brand" aria-label="Common Ground home">
+        <span class="brand-mark">CG</span>
+        <span>COMMON GROUND</span>
+      </a>
+      <button class="nav-toggle" @click="menu=!menu" :aria-expanded="menu.toString()" aria-label="Toggle navigation">MENU</button>
+      <nav class="nav-links" :class="{ 'is-open': menu }">
+        <a href="#rooms" @click="menu=false">Rooms</a>
+        <a href="#notes" @click="menu=false">Field notes</a>
+        <a href="#visit" @click="menu=false">Visit</a>
+      </nav>
+      <a href="#visit" class="btn btn-dark nav-cta">Book a seat</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero page-wrap">
+      <div class="hero-copy">
+        <p class="mono-label">01 / A QUIET PLACE FOR LOUD IDEAS</p>
+        <h1>MAKE<br>ROOM<br>FOR<br>THOUGHT.</h1>
+        <div class="hero-bottom">
+          <span class="mint-tag">NEW / OCTOBER 2026</span>
+          <p>Common Ground is a fictional members' house for people who make things, question things, and occasionally need a table that stays quiet.</p>
+        </div>
+      </div>
+
+      <div class="hero-object" aria-label="Editorial still life">
+        <div class="object-card object-card-back">
+          <span>12:47</span>
+          <small>ARRIVAL</small>
+        </div>
+        <div class="object-card object-card-main">
+          <div class="object-tape">COMMON GROUND</div>
+          <div class="object-disc"></div>
+          <div class="object-line"></div>
+          <div class="object-note">A ROOM<br>WITHOUT<br>THE NOISE</div>
+        </div>
+        <div class="object-card object-card-front">
+          <span>04</span>
+          <small>TABLES</small>
+        </div>
+        <span class="burst burst-a">◎</span>
+        <span class="burst burst-b">+</span>
+        <span class="burst burst-c">11°</span>
+      </div>
+    </section>
+
+    <section id="rooms" class="section page-wrap">
+      <div class="section-intro">
+        <p class="mono-label">02 / THE HOUSE</p>
+        <h2>FOUR ROOMS.<br>NO TWO ALIKE.</h2>
+        <p>Every room has a different job. The trick is knowing which one you actually need.</p>
+      </div>
+
+      <div class="room-grid">
+        <article class="room-card" :class="{ 'room-card-active': activeRoom === 'The Long Table' }" @click="activeRoom='The Long Table'">
+          <div class="room-no">01</div>
+          <span class="mint-tag">FOCUS</span>
+          <h3>THE LONG<br>TABLE</h3>
+          <p>Shared work surface. Sixteen chairs. One rule: headphones down when the bell rings.</p>
+          <div class="room-meta"><span>08:00 — 20:00</span><span>16 SEATS</span></div>
+        </article>
+        <article class="room-card room-card-dark" :class="{ 'room-card-active-dark': activeRoom === 'The Listening Room' }" @click="activeRoom='The Listening Room'">
+          <div class="room-no">02</div>
+          <span class="mint-tag">LISTEN</span>
+          <h3>THE LISTENING<br>ROOM</h3>
+          <p>Vinyl, printed magazines, and a speaker system that makes people stay longer than planned.</p>
+          <div class="room-meta"><span>10:00 — 23:00</span><span>08 SEATS</span></div>
+        </article>
+        <article class="room-card" :class="{ 'room-card-active': activeRoom === 'The Green Room' }" @click="activeRoom='The Green Room'">
+          <div class="room-no">03</div>
+          <span class="mint-tag">RESET</span>
+          <h3>THE GREEN<br>ROOM</h3>
+          <p>Plants, bad sketches, sunlight. Designed for the exact moment your best idea isn't showing up.</p>
+          <div class="room-meta"><span>ALL DAY</span><span>05 SEATS</span></div>
+        </article>
+        <article class="room-card room-card-yellow" :class="{ 'room-card-active-yellow': activeRoom === 'The Archive' }" @click="activeRoom='The Archive'">
+          <div class="room-no">04</div>
+          <span class="mint-tag">WANDER</span>
+          <h3>THE<br>ARCHIVE</h3>
+          <p>Old journals, local maps, dead magazines. Nothing here is new, which is precisely the point.</p>
+          <div class="room-meta"><span>09:00 — 19:00</span><span>01 RULE</span></div>
+        </article>
+      </div>
+
+      <div class="selection-note">
+        <span class="mono-label">CURRENTLY VIEWING</span>
+        <strong x-text="activeRoom"></strong>
+        <span class="selection-dot"></span>
+      </div>
+    </section>
+
+    <section id="notes" class="dark-section">
+      <div class="page-wrap dark-inner">
+        <div>
+          <p class="mono-label mono-invert">03 / FIELD NOTES</p>
+          <h2>GOOD WORK<br>NEEDS A LITTLE<br>WEATHER.</h2>
+        </div>
+        <div class="notes-copy">
+          <p>We collect small observations from the house and leave them on the wall.</p>
+          <div class="note-list">
+            <div><span>OCT 03</span><strong>Most ideas arrive five minutes after you stop chasing them.</strong></div>
+            <div><span>SEP 27</span><strong>A window is still a useful piece of software.</strong></div>
+            <div><span>SEP 19</span><strong>Bring less. Notice more.</strong></div>
+          </div>
+          <a href="#visit" class="text-link invert-link">Read the whole notebook ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="visit" class="section page-wrap visit-section">
+      <div class="visit-card">
+        <div class="visit-left">
+          <p class="mono-label">04 / COME BY</p>
+          <h2>YOU DON'T<br>NEED AN<br>INVITATION.</h2>
+          <p class="visit-lede">Drop in for a coffee, bring a half-finished thought, or sit here long enough for one to become a plan.</p>
+          <div class="address">
+            <span>17 LOWELL STREET</span>
+            <span>PEKANBARU / 10127</span>
+          </div>
+        </div>
+        <div class="visit-right">
+          <div class="hours">
+            <div><span>MON — FRI</span><strong>08:00 — 20:00</strong></div>
+            <div><span>SATURDAY</span><strong>10:00 — 18:00</strong></div>
+            <div><span>SUNDAY</span><strong>OFF THE GRID</strong></div>
+          </div>
+          <form @submit.prevent="sent=true; email=''" class="signup-form">
+            <label for="email">A NOTE, OCCASIONALLY</label>
+            <div class="signup-row">
+              <input id="email" type="email" x-model="email" placeholder="you@example.com" required>
+              <button type="submit" class="btn btn-dark">Join</button>
+            </div>
+            <p x-show="!sent" class="form-meta">One email when the house has something worth leaving the house for.</p>
+            <p x-show="sent" class="form-meta form-success">You're on the list. We'll keep it human.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="page-wrap footer-inner">
+      <div><span class="brand-mark">CG</span> <span>COMMON GROUND</span></div>
+      <span class="mono-label">A FICTIONAL PLACE / MADE FOR THIS DEMO</span>
+      <a href="#top" class="text-link">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
