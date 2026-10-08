@@ -29,20 +29,57 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Scroll reveals: staggered, one-shot, and motion-safe.
+  const revealGroups = [
+    ['.section-intro > *', 'up'],
+    ['.room-card', 'up'],
+    ['.selection-note', 'scale'],
+    ['.dark-inner > *', 'up'],
+    ['.note-row', 'right'],
+    ['.visit-card > *', 'up'],
+    ['.hours', 'up'],
+    ['.signup-form', 'up'],
+    ['.footer-inner > *', 'up']
+  ];
+
+  const revealItems = [];
+  revealGroups.forEach(([selector, direction]) => {
+    document.querySelectorAll(selector).forEach(el => {
+      if (el.classList.contains('reveal')) return;
+      el.classList.add('reveal');
+      if (direction === 'left') el.classList.add('reveal-left');
+      if (direction === 'right') el.classList.add('reveal-right');
+      if (direction === 'scale') el.classList.add('reveal-scale');
+      const siblings = el.parentElement ? [...el.parentElement.children].filter(child => child.matches(selector)) : [];
+      const siblingIndex = siblings.indexOf(el);
+      el.style.transitionDelay = Math.min(siblingIndex * 90, 360) + 'ms';
+      revealItems.push(el);
+    });
+  });
+
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealItems.forEach(el => el.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealItems.forEach(el => observer.observe(el));
+  }
+
   const sections = [...document.querySelectorAll('main section[id]')];
   const navLinks = [...document.querySelectorAll('.nav-links a')];
-
   const setActiveNav = () => {
     const marker = window.scrollY + 180;
     let active = 'top';
     sections.forEach(section => {
       if (marker >= section.offsetTop) active = section.id;
     });
-    navLinks.forEach(link => {
-      link.classList.toggle('nav-active', link.getAttribute('href') === '#' + active);
-    });
+    navLinks.forEach(link => link.classList.toggle('nav-active', link.getAttribute('href') === '#' + active));
   };
-
   setActiveNav();
   window.addEventListener('scroll', setActiveNav, { passive: true });
 
