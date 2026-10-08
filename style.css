@@ -223,9 +223,9 @@ html{scrollbar-color:var(--black) var(--canvas);scrollbar-width:thin}
 @media (prefers-reduced-motion:reduce){.hero-copy,.hero-object{opacity:1;transform:none;filter:none;animation:none!important}.reveal{opacity:1;transform:none!important;filter:none!important;clip-path:none!important;transition:none}.booking-panel,.nav-links.is-open{animation:none}}
 
 .section-panel{width:min(1600px,100%);margin-inline:auto;position:relative;overflow:clip;border:1px solid transparent;border-radius:56px;transform-style:preserve-3d;backface-visibility:hidden}
-.hero-panel{background:var(--canvas)}
-.rooms-panel{background:var(--canvas)}
-.notes-panel{background:var(--black)}
+.hero-panel{background:var(--canvas);z-index:1}
+.rooms-panel{background:#f2efe8;z-index:3;margin-top:-140px}
+.notes-panel{background:var(--black);z-index:4;margin-top:-36px}
 .visit-panel{background:var(--white)}
 .hero-panel,.rooms-panel,.notes-panel,.visit-panel{min-height:0}
 .site-stage > .section-panel{opacity:0;transform:translate3d(0,0,-150px) scale(.91) rotateX(2deg);filter:blur(16px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1.05s cubic-bezier(.16,1,.3,1),filter 1s cubic-bezier(.16,1,.3,1)}
@@ -251,14 +251,14 @@ html{scrollbar-color:var(--black) var(--canvas);scrollbar-width:thin}
 .section-panel.visit-panel{background:var(--white)}
 
 /* Final panel geometry: full-width surfaces, constrained content, no nested container squeeze. */
-.site-stage{padding:0 8px 10px;gap:10px}
+.site-stage{padding:0 8px 10px;gap:0}
 .section-panel{width:100%;max-width:none;margin:0;box-sizing:border-box}
 .hero-panel{padding-inline:clamp(28px,5vw,88px)}
 .rooms-panel{padding-inline:clamp(28px,5vw,88px)}
 .hero-panel.hero,.rooms-panel.section{width:100%;max-width:none}
-.hero-panel.hero{min-height:740px}
+.hero-panel.hero{min-height:900px;padding-bottom:170px}
 .rooms-panel .section-intro,.rooms-panel .room-grid,.rooms-panel .selection-note{width:min(1200px,100%);max-width:1200px;margin-left:auto;margin-right:auto}
-.rooms-panel .section-intro{margin-bottom:46px}
+.rooms-panel .section-intro{margin-bottom:46px;padding-top:8px}
 .rooms-panel .room-grid{padding:0}
 .rooms-panel .selection-note{display:flex}
 .notes-panel .dark-inner{width:min(1200px,calc(100% - 40px))}
@@ -282,4 +282,16 @@ html{scrollbar-color:var(--black) var(--canvas);scrollbar-width:thin}
   .object-card-main{width:410px;height:500px}
   .object-card-back{width:250px;height:330px}
   .object-card-front{width:195px;height:122px}
+}
+
+@media (max-width:860px){
+  .site-stage{gap:0}
+  .hero-panel.hero{min-height:820px;padding-bottom:140px}
+  .rooms-panel{margin-top:-96px}
+  .notes-panel{margin-top:-24px}
+}
+@media (max-width:520px){
+  .hero-panel.hero{min-height:760px;padding-bottom:110px}
+  .rooms-panel{margin-top:-64px}
+  .notes-panel{margin-top:-18px}
 }
