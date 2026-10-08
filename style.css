@@ -9,8 +9,34 @@ html{scroll-behavior:smooth}
 body{margin:0;background:var(--canvas);color:var(--black);font-family:var(--body);font-size:16px;line-height:1.25}
 a{color:inherit;text-decoration:none}
 button,input{font:inherit}
-.site-header{height:128px;padding:32px 20px;display:flex;align-items:center}
-.nav-shell{width:min(1200px,100%);margin:0 auto;background:var(--white);border-radius:48px;min-height:64px;padding:10px 12px 10px 20px;display:flex;align-items:center;gap:24px}
+.site-header{
+  position:fixed;
+  top:18px;
+  left:0;
+  right:0;
+  z-index:50;
+  height:72px;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  pointer-events:none
+}
+.nav-shell{
+  width:min(1200px,100%);
+  margin:0 auto;
+  min-height:64px;
+  padding:10px 12px 10px 20px;
+  display:flex;
+  align-items:center;
+  gap:24px;
+  border:1px solid rgba(255,255,255,.72);
+  border-radius:48px;
+  background:rgba(255,255,255,.58);
+  backdrop-filter:blur(18px) saturate(120%);
+  -webkit-backdrop-filter:blur(18px) saturate(120%);
+  box-shadow:0 8px 30px rgba(0,0,0,.06);
+  pointer-events:auto
+}
 .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;letter-spacing:-.02em;white-space:nowrap}
 .brand-mark{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;background:var(--black);color:var(--white);font:400 11px/1 var(--mono)}
 .nav-links{display:flex;gap:24px;align-items:center;margin-left:auto}
@@ -21,7 +47,7 @@ button,input{font:inherit}
 .btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:8px;padding:16px 24px;font-weight:600;cursor:pointer}
 .btn-dark{background:var(--black);color:var(--white)}
 .btn-dark:hover{background:var(--graphite)}
-.hero{min-height:690px;padding:72px 0 88px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.hero{min-height:690px;padding:170px 0 88px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
 .mono-label{font:400 12px/1.6 var(--mono);letter-spacing:-.03em;color:var(--slate);text-transform:uppercase}
 .hero h1,.section h2,.dark-section h2,.visit-card h2{font:500 clamp(72px,10.8vw,130px)/.9 var(--display);letter-spacing:-.03em;margin:24px 0 38px;text-transform:uppercase}
 .hero-bottom{display:flex;gap:20px;align-items:flex-start;max-width:540px}
@@ -96,13 +122,13 @@ button,input{font:inherit}
 .footer-inner>div{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600}
 .footer .mono-label{color:var(--ash)}
 @media (max-width:860px){
-  .site-header{height:104px;padding:20px}
+  .site-header{top:12px;height:64px;padding:0 14px}
   .nav-shell{position:relative;padding:10px 14px}
   .nav-toggle{display:block;margin-left:auto}
   .nav-links{display:none;position:absolute;left:10px;right:10px;top:66px;background:var(--white);border-radius:24px;padding:18px;flex-direction:column;align-items:flex-start;z-index:20}
   .nav-links.is-open{display:flex}
   .nav-cta{display:none}
-  .hero{grid-template-columns:1fr;padding-top:54px}
+  .hero{grid-template-columns:1fr;padding-top:132px}
   .hero-object{height:460px;order:-1}
   .object-card-main{width:320px;height:390px}.object-disc{width:200px;height:200px}
   .hero-bottom{flex-direction:column}
@@ -114,6 +140,7 @@ button,input{font:inherit}
   .footer-inner{flex-wrap:wrap}
 }
 @media (max-width:520px){
+  .site-header{top:10px}
   .page-wrap{width:min(100% - 28px,1200px)}
   .site-header{padding:14px}
   .nav-shell{border-radius:36px}
