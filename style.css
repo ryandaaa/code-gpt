@@ -37,7 +37,7 @@ button,input{font:inherit}
   box-shadow:0 8px 30px rgba(0,0,0,.06);
   pointer-events:auto
 }
- .brand{font-family:'Lily Script One',cursive !important;font-weight:400;font-style:normal;font-size:35px;line-height:1;white-space:nowrap;letter-spacing:.01em}
+ .brand{display:grid;place-items:center;width:42px;height:42px;color:var(--black);line-height:1;transition:transform .2s ease}.brand-icon{width:25px;height:25px;display:block}.brand:hover{transform:rotate(30deg) scale(1.04)}
 .brand-mark{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;background:var(--black);color:var(--white);font:400 11px/1 var(--mono)}
 .nav-links{display:flex;gap:24px;align-items:center;margin-left:auto}
 .nav-links a,.nav-toggle{font-size:14px;font-weight:500;color:var(--slate);position:relative}.nav-links a::after{content:'';position:absolute;left:0;right:0;bottom:-7px;height:2px;background:var(--black);transform:scaleX(0);transform-origin:center;transition:transform .2s ease}.nav-links a:hover::after,.nav-links a.nav-active::after{transform:scaleX(1)}
@@ -121,7 +121,7 @@ button,input{font:inherit}
 .footer-inner{display:flex;align-items:center;gap:20px;justify-content:space-between}
 .footer-inner>div{display:flex;align-items:center;gap:10px}
 .footer .mono-label{color:var(--ash)}
-.footer-brand{font-family:'Lily Script One',cursive !important;font-weight:400;font-style:normal;font-size:30px;line-height:1;color:var(--white)}
+.footer-brand{display:grid;place-items:center;width:32px;height:32px;color:var(--white);line-height:1;transition:transform .2s ease}.footer-brand .brand-icon{width:20px;height:20px}.footer-brand:hover{transform:rotate(30deg)}
 @media (max-width:860px){
   .site-header{top:12px;height:64px;padding:0 14px}
   .nav-shell{position:relative;padding:10px 14px}
@@ -180,4 +180,4 @@ button,input{font:inherit}
 .time-grid button{padding:14px 8px;border:1px solid var(--ash);background:var(--white);border-radius:12px;cursor:pointer;font:400 12px/1 var(--mono);transition:all .18s ease}
 .time-grid button:hover,.time-grid button.time-active{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-2px)}
 .booking-confirm{width:100%;border-radius:48px}
-@media (max-width:520px){.brand{font-size:31px}.time-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.brand{width:40px;height:40px}.brand-icon{width:23px;height:23px}.time-grid{grid-template-columns:repeat(2,1fr)}}
