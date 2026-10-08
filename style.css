@@ -377,3 +377,31 @@ html{scrollbar-color:var(--black) var(--canvas);scrollbar-width:thin}
     z-index:-1;
   }
 }
+
+/* Clean stack seam: the lower edge of a panel is hidden by the panel above it. */
+@media (min-width:861px){
+  .rooms-panel{
+    border-bottom-left-radius:0 !important;
+    border-bottom-right-radius:0 !important;
+    overflow:visible;
+  }
+  .notes-panel{
+    margin-top:-112px !important;
+    border-top-left-radius:56px;
+    border-top-right-radius:56px;
+    overflow:clip;
+  }
+}
+@media (max-width:860px){
+  .rooms-panel{
+    border-bottom-left-radius:0 !important;
+    border-bottom-right-radius:0 !important;
+    overflow:visible;
+  }
+  .notes-panel{
+    margin-top:-72px !important;
+    border-top-left-radius:40px;
+    border-top-right-radius:40px;
+    overflow:clip;
+  }
+}
