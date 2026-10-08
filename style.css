@@ -181,3 +181,10 @@ button,input{font:inherit}
 .time-grid button:hover,.time-grid button.time-active{background:var(--black);color:var(--white);border-color:var(--black);transform:translateY(-2px)}
 .booking-confirm{width:100%;border-radius:48px}
 @media (max-width:520px){.brand{width:40px;height:40px}.brand-icon{width:23px;height:23px}.time-grid{grid-template-columns:repeat(2,1fr)}}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,.8,.22,1),transform .8s cubic-bezier(.22,.8,.22,1);will-change:opacity,transform}
+.reveal.reveal-left{transform:translateX(-28px)}
+.reveal.reveal-right{transform:translateX(28px)}
+.reveal.reveal-scale{transform:scale(.96)}
+.reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none!important;transition:none}}
