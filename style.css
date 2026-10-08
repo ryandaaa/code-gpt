@@ -341,3 +341,39 @@ html{scrollbar-color:var(--black) var(--canvas);scrollbar-width:thin}
     margin-top:-24px !important;
   }
 }
+
+/* Stack correction: let the next room physically cover the previous room's lower corners. */
+@media (min-width:861px){
+  .notes-panel{
+    margin-top:-112px !important;
+    position:relative;
+    z-index:20;
+  }
+  .notes-panel::before{
+    content:'';
+    position:absolute;
+    top:-18px;
+    left:0;
+    right:0;
+    height:44px;
+    background:var(--black);
+    pointer-events:none;
+    z-index:-1;
+  }
+}
+@media (max-width:860px){
+  .notes-panel{
+    margin-top:-72px !important;
+  }
+  .notes-panel::before{
+    content:'';
+    position:absolute;
+    top:-12px;
+    left:0;
+    right:0;
+    height:30px;
+    background:var(--black);
+    pointer-events:none;
+    z-index:-1;
+  }
+}
