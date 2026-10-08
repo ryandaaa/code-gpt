@@ -426,3 +426,100 @@ html{scrollbar-color:var(--black) var(--canvas);scrollbar-width:thin}
     z-index:20;
   }
 }
+
+/* Visit panel refinement: one surface, stronger editorial hierarchy, less nested-card feeling. */
+.visit-panel{
+  padding:0 clamp(28px,5vw,88px) !important;
+  background:#faf9f6 !important;
+}
+.visit-panel .visit-card{
+  width:min(1200px,100%);
+  min-height:640px;
+  margin:0 auto;
+  padding:84px 0 96px;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);
+  gap:clamp(64px,8vw,120px);
+  align-items:start;
+}
+.visit-panel .visit-card:hover{border-color:transparent}
+.visit-left{max-width:610px}
+.visit-card h2{
+  font-size:clamp(76px,8.5vw,124px) !important;
+  line-height:.84 !important;
+  letter-spacing:-.035em !important;
+  margin:16px 0 34px !important;
+}
+.visit-lede{
+  max-width:520px;
+  font-size:18px;
+  line-height:1.42;
+  color:var(--slate);
+}
+.address{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px 24px;
+  max-width:420px;
+  padding-top:34px;
+  margin-top:34px;
+  border-top:1px solid var(--ash);
+}
+.visit-right{
+  padding-top:8px;
+}
+.hours{
+  border-radius:24px !important;
+  padding:8px 22px 10px !important;
+  background:#f0efeb !important;
+}
+.hours>div{
+  padding:18px 0 !important;
+}
+.signup-form{
+  margin-top:44px;
+  padding-top:30px;
+  border-top:1px solid var(--ash);
+}
+.signup-form label{
+  font-size:11px;
+  letter-spacing:.06em;
+}
+.signup-row input{
+  background:#efeeea;
+  border-radius:999px;
+  padding:16px 20px;
+}
+.signup-row .btn{
+  min-width:92px;
+  border-radius:999px;
+}
+.visit-panel::after{
+  content:'OPEN DOOR / TAKE YOUR TIME';
+  position:absolute;
+  right:clamp(28px,5vw,88px);
+  bottom:26px;
+  font:400 10px/1.4 var(--mono);
+  color:var(--smoke);
+  letter-spacing:.04em;
+}
+@media (max-width:860px){
+  .visit-panel{padding:0 20px !important}
+  .visit-panel .visit-card{
+    grid-template-columns:1fr;
+    gap:48px;
+    min-height:auto;
+    padding:68px 0 88px;
+  }
+  .visit-card h2{font-size:clamp(64px,15vw,100px) !important}
+  .visit-panel::after{right:20px}
+}
+@media (max-width:520px){
+  .visit-panel{padding:0 20px !important}
+  .visit-panel .visit-card{padding:58px 0 76px}
+  .address{grid-template-columns:1fr}
+  .visit-panel::after{right:20px;bottom:18px}
+}
