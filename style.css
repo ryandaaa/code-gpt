@@ -405,3 +405,53 @@ html{scrollbar-color:var(--black) var(--canvas);scrollbar-width:thin}
     overflow:clip;
   }
 }
+
+/* Preserve the 02 footer control while keeping the 03 panel overlap. */
+@media (min-width:861px){
+  .rooms-panel{
+    padding-bottom:28px;
+  }
+  .rooms-panel .selection-note{
+    position:relative;
+    z-index:30;
+  }
+  .notes-panel{
+    margin-top:-34px !important;
+    z-index:20;
+  }
+  .rooms-panel::after{
+    content:'';
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-34px;
+    height:34px;
+    background:#f3efe5;
+    z-index:10;
+    pointer-events:none;
+  }
+}
+@media (max-width:860px){
+  .rooms-panel{
+    padding-bottom:22px;
+  }
+  .rooms-panel .selection-note{
+    position:relative;
+    z-index:30;
+  }
+  .notes-panel{
+    margin-top:-24px !important;
+    z-index:20;
+  }
+  .rooms-panel::after{
+    content:'';
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-24px;
+    height:24px;
+    background:#f3efe5;
+    z-index:10;
+    pointer-events:none;
+  }
+}
