@@ -2,7 +2,7 @@
   --black:#000000; --white:#ffffff; --canvas:#e5e5e5; --mist:#f3f3f3;
   --ash:#c6c6c6; --smoke:#979797; --slate:#444444; --graphite:#2f2f2f;
   --mint:#d1ffca; --yellow:#fff100;
-  --display:'Anton', Impact, sans-serif; --body:'Inter', Arial, sans-serif; --mono:'DM Mono', monospace;
+  --display:'Barlow Condensed', 'Arial Narrow', Impact, sans-serif; --body:'Inter', Arial, sans-serif; --mono:'DM Mono', monospace;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -23,7 +23,7 @@ button,input{font:inherit}
 .btn-dark:hover{background:var(--graphite)}
 .hero{min-height:690px;padding:72px 0 88px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
 .mono-label{font:400 12px/1.6 var(--mono);letter-spacing:-.03em;color:var(--slate);text-transform:uppercase}
-.hero h1,.section h2,.dark-section h2,.visit-card h2{font:700 clamp(72px,10.8vw,130px)/.9 var(--display);letter-spacing:-.03em;margin:24px 0 38px;text-transform:uppercase}
+.hero h1,.section h2,.dark-section h2,.visit-card h2{font:500 clamp(72px,10.8vw,130px)/.9 var(--display);letter-spacing:-.03em;margin:24px 0 38px;text-transform:uppercase}
 .hero-bottom{display:flex;gap:20px;align-items:flex-start;max-width:540px}
 .hero-bottom p{margin:0;color:var(--slate);font-size:16px}
 .mint-tag{display:inline-flex;width:max-content;background:var(--mint);border-radius:64px;padding:8px 14px;font:400 12px/1 var(--mono);white-space:nowrap}
