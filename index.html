@@ -7,7 +7,6 @@
   <title>Common Ground — Rooms for ideas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lily+Script+One&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Mono:wght@400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -16,7 +15,7 @@
 <body x-data="{menu:false,activeRoom:'The Long Table',expandedRoom:'',activeNote:0,showAllNotes:false,activeNav:'top',email:'',sent:false,bookingOpen:false,selectedTime:'09:00',notice:'',openNotice(message){this.notice=message;setTimeout(()=>this.notice='',2600)}}" @keydown.escape.window="bookingOpen=false" class="min-h-screen overflow-x-hidden">
   <header class="site-header">
     <div class="nav-shell">
-      <a href="#top" class="brand" aria-label="Common Ground home">Common Ground</a>
+      <a href="#top" class="brand" aria-label="Common Ground home" title="Common Ground"><svg viewBox="0 0 24 24" aria-hidden="true" class="brand-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m21 16-9 5-9-5V8l9-5 9 5Z"/><path d="m3.3 7.6 8.7 5 8.7-5"/></svg></a>
       <button class="nav-toggle" @click="menu=!menu" :aria-expanded="menu.toString()" aria-label="Toggle navigation">MENU</button>
       <nav class="nav-links" :class="{ 'is-open': menu }">
         <a href="#rooms" :class="{ 'nav-active': activeNav==='rooms' }" @click="menu=false;activeNav='rooms'">Rooms</a>
@@ -155,7 +154,7 @@
 
   <footer class="footer">
     <div class="page-wrap footer-inner">
-      <div><a href="#top" class="footer-brand">Common Ground</a></div>
+      <div><a href="#top" class="footer-brand" aria-label="Common Ground home" title="Common Ground"><svg viewBox="0 0 24 24" aria-hidden="true" class="brand-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m21 16-9 5-9-5V8l9-5 9 5Z"/><path d="m3.3 7.6 8.7 5 8.7-5"/></svg></a></div>
       <span class="mono-label">A FICTIONAL PLACE / MADE FOR THIS DEMO</span>
       <a href="#top" class="text-link">Back to top ↑</a>
     </div>
