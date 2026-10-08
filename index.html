@@ -12,7 +12,7 @@
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
-<body x-data="{menu:false,activeRoom:'The Long Table',expandedRoom:'',activeNote:0,showAllNotes:false,activeNav:'top',email:'',sent:false,bookingOpen:false,selectedTime:'09:00',notice:'',activeFrame:{left:0,top:0,width:0,height:0,color:'#000'},openNotice(message){this.notice=message;setTimeout(()=>this.notice='',2600)},moveFrame(el){const grid=el.closest('.room-grid');if(!grid)return;const a=grid.getBoundingClientRect();const b=el.getBoundingClientRect();this.activeFrame={left:b.left-a.left,top:b.top-a.top,width:b.width,height:b.height,color:el.classList.contains('room-card-dark')?'#fff':'#000'}}}" @keydown.escape.window="bookingOpen=false" class="min-h-screen overflow-x-hidden">
+<body x-data="{menu:false,activeRoom:'The Long Table',expandedRoom:'',activeNote:0,showAllNotes:false,activeNav:'top',email:'',sent:false,bookingOpen:false,selectedTime:'09:00',notice:'',openNotice(message){this.notice=message;setTimeout(()=>this.notice='',2600)}}" @keydown.escape.window="bookingOpen=false" class="min-h-screen overflow-x-hidden">
   <header class="site-header">
     <div class="nav-shell">
       <a href="#top" class="brand" aria-label="Common Ground home" title="Common Ground"><svg viewBox="0 0 24 24" aria-hidden="true" class="brand-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m21 16-9 5-9-5V8l9-5 9 5Z"/><path d="m3.3 7.6 8.7 5 8.7-5"/></svg></a>
@@ -66,8 +66,8 @@
         <p>Every room has a different job. The trick is knowing which one you actually need.</p>
       </div>
 
-      <div class="room-grid" x-init="$nextTick(() => moveFrame($el.querySelector('.room-card')))">
-        <span class="room-active-frame" aria-hidden="true" :style="{ width: activeFrame.width + 'px', height: activeFrame.height + 'px', transform: 'translate3d(' + activeFrame.left + 'px,' + activeFrame.top + 'px,0)', borderColor: activeFrame.color, opacity: activeFrame.width ? 1 : 0 }"></span>
+      <div class="room-grid">
+        <span class="room-active-frame" aria-hidden="true"></span>
         <article role="button" tabindex="0" class="room-card" :class="{ 'room-card-active': activeRoom==='The Long Table', 'room-card-expanded': expandedRoom==='The Long Table' }" @click="activeRoom='The Long Table';expandedRoom=expandedRoom==='The Long Table'?'':'The Long Table';$nextTick(()=>moveFrame($event.currentTarget))" @keydown.enter.prevent="$event.currentTarget.click()">
           <div class="room-no">01</div><span class="mint-tag">FOCUS</span><h3>THE LONG<br>TABLE</h3>
           <p>Shared work surface. Sixteen chairs. One rule: headphones down when the bell rings.</p>
