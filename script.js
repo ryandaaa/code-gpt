@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  requestAnimationFrame(() => document.documentElement.classList.add('page-ready'));
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -98,21 +99,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const roomGrid = document.querySelector('.room-grid');
   const activeFrame = roomGrid?.querySelector('.room-active-frame');
-  const syncActiveFrame = () => {
-    if (!roomGrid || !activeFrame) return;
-    const active = roomGrid.querySelector('.room-card-active, .room-card-active-dark, .room-card-active-yellow');
-    if (!active) return;
+  const positionRoomFrame = (card) => {
+    if (!roomGrid || !activeFrame || !card) return;
     const gridRect = roomGrid.getBoundingClientRect();
-    const cardRect = active.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
     activeFrame.style.width = cardRect.width + 'px';
     activeFrame.style.height = cardRect.height + 'px';
     activeFrame.style.transform = 'translate3d(' + (cardRect.left - gridRect.left) + 'px,' + (cardRect.top - gridRect.top) + 'px,0)';
-    activeFrame.style.borderColor = active.classList.contains('room-card-dark') ? '#fff' : '#000';
+    activeFrame.classList.toggle('is-on-dark', card.classList.contains('room-card-dark'));
     activeFrame.style.opacity = '1';
   };
-  syncActiveFrame();
-  if (roomGrid && 'ResizeObserver' in window) new ResizeObserver(syncActiveFrame).observe(roomGrid);
-  window.addEventListener('resize', syncActiveFrame);
+  if (roomGrid && activeFrame) {
+    const initialRoom = roomGrid.querySelector('.room-card-active, .room-card-active-dark, .room-card-active-yellow');
+    requestAnimationFrame(() => positionRoomFrame(initialRoom));
+    roomGrid.addEventListener('click', event => {
+      const card = event.target.closest('.room-card');
+      if (!card || !roomGrid.contains(card)) return;
+      requestAnimationFrame(() => positionRoomFrame(card));
+    });
+    roomGrid.addEventListener('keydown', event => {
+      if (event.key !== 'Enter') return;
+      const card = event.target.closest('.room-card');
+      if (!card) return;
+      requestAnimationFrame(() => positionRoomFrame(card));
+    });
+    if ('ResizeObserver' in window) new ResizeObserver(() => {
+      const current = roomGrid.querySelector('.room-card-active, .room-card-active-dark, .room-card-active-yellow');
+      positionRoomFrame(current);
+    }).observe(roomGrid);
+    window.addEventListener('resize', () => {
+      const current = roomGrid.querySelector('.room-card-active, .room-card-active-dark, .room-card-active-yellow');
+      positionRoomFrame(current);
+    });
+  }
 
   document.querySelectorAll('.btn, .mint-tag, .burst, .time-grid button, .icon-close').forEach(button => {
     button.addEventListener('pointerdown', () => {
