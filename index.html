@@ -7,7 +7,7 @@
   <title>Common Ground — Rooms for ideas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lily+Script+One&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Mono:wght@400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -39,17 +39,17 @@
       </div>
 
       <div class="hero-object" aria-label="Editorial still life">
-        <div class="object-card object-card-back">
+        <button type="button" class="object-card object-card-back object-interactive" @click="openNotice('Arrival logged at 12:47. The quiet starts here.')">
           <span>12:47</span>
           <small>ARRIVAL</small>
-        </div>
-        <div class="object-card object-card-main">
+        </button>
+        <button type="button" class="object-card object-card-main object-interactive" @click="openNotice('A good room changes what you notice.')">
           <div class="object-tape">COMMON GROUND</div>
           <div class="object-disc"></div>
           <div class="object-line"></div>
           <div class="object-note">A ROOM<br>WITHOUT<br>THE NOISE</div>
-        </div>
-        <div class="object-card object-card-front">
+        </button>
+        <button type="button" class="object-card object-card-front object-interactive">
           <span>04</span>
           <small>TABLES</small>
         </div>
