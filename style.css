@@ -126,7 +126,8 @@ button,input{font:inherit}
   .nav-shell{position:relative;padding:10px 14px}
   .nav-toggle{display:block;margin-left:auto}
   .nav-links{display:none;position:absolute;left:10px;right:10px;top:66px;background:var(--white);border-radius:24px;padding:18px;flex-direction:column;align-items:flex-start;z-index:20}
-  .nav-links.is-open{display:flex}
+  .nav-links.is-open{display:flex;animation:menu-arrive .3s cubic-bezier(.16,1,.3,1)}
+@keyframes menu-arrive{from{opacity:0;transform:translateY(-8px);filter:blur(7px)}to{opacity:1;transform:none;filter:blur(0)}}
   .nav-cta{display:none}
   .hero{grid-template-columns:1fr;padding-top:132px}
   .hero-object{height:460px;order:-1}
@@ -169,8 +170,9 @@ button,input{font:inherit}
 .note-row:hover strong{text-decoration:underline}
 .notebook-extra{max-width:440px;color:var(--smoke);font-size:14px;line-height:1.45;margin:18px 0 0}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:80;background:var(--black);color:var(--white);border-radius:999px;padding:12px 18px;font:400 12px/1.3 var(--mono);box-shadow:0 10px 30px rgba(0,0,0,.14)}
-.booking-overlay{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.38);display:grid;place-items:center;padding:24px}
-.booking-panel{width:min(520px,100%);background:var(--white);border-radius:40px;padding:28px}
+.booking-overlay{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.42);display:grid;place-items:center;padding:24px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.booking-panel{width:min(520px,100%);background:var(--white);border-radius:40px;padding:28px;animation:panel-arrive .55s cubic-bezier(.16,1,.3,1)}
+@keyframes panel-arrive{from{opacity:0;transform:translateY(24px) scale(.96);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
 .booking-head{display:flex;justify-content:space-between;gap:20px}
 .booking-head h3{font:500 64px/.9 var(--display);margin:10px 0 0;text-transform:uppercase}
 .icon-close{border:0;background:var(--canvas);width:44px;height:44px;border-radius:50%;font-size:28px;cursor:pointer}
@@ -181,7 +183,17 @@ button,input{font:inherit}
 .booking-confirm{width:100%;border-radius:48px}
 @media (max-width:520px){.brand{width:40px;height:40px}.brand-icon{width:23px;height:23px}.time-grid{grid-template-columns:repeat(2,1fr)}}
 
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,.8,.22,1),transform .8s cubic-bezier(.22,.8,.22,1);will-change:opacity,transform}
+.reveal{opacity:0;transform:translateY(38px) scale(.985);filter:blur(13px);clip-path:inset(7% 0 0 round 24px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1),filter 1s cubic-bezier(.16,1,.3,1),clip-path 1s cubic-bezier(.16,1,.3,1);will-change:opacity,transform,filter}
+.reveal.reveal-left{transform:translateX(-30px) scale(.985)}
+.reveal.reveal-right{transform:translateX(30px) scale(.985)}
+.reveal.reveal-scale{transform:scale(.94);filter:blur(16px)}
+.reveal.is-visible{opacity:1;transform:none;filter:blur(0);clip-path:inset(0 0 0 round 24px)}
+
+.hero-copy,.hero-object{opacity:0;transform:translateY(24px) scale(.985);filter:blur(12px)}
+.page-ready .hero-copy,.page-ready .hero-object{animation:hero-arrive 1.05s cubic-bezier(.16,1,.3,1) forwards}
+.page-ready .hero-object{animation-delay:.12s}
+@keyframes hero-arrive{to{opacity:1;transform:none;filter:blur(0)}}
+
 .reveal.reveal-left{transform:translateX(-28px)}
 .reveal.reveal-right{transform:translateX(28px)}
 .reveal.reveal-scale{transform:scale(.96)}
@@ -197,8 +209,8 @@ html{scrollbar-color:var(--black) var(--canvas);scrollbar-width:thin}
 .scroll-progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:100;background:transparent;pointer-events:none}
 .scroll-progress span{display:block;width:0;height:100%;background:var(--black);transform-origin:left center;transition:width .08s linear}
 .room-grid{position:relative}
-.room-active-frame{position:absolute;top:0;left:0;z-index:5;pointer-events:none;border:1.5px solid var(--black);border-radius:32px;box-sizing:border-box;transition:transform .42s cubic-bezier(.2,.75,.2,1),width .42s cubic-bezier(.2,.75,.2,1),height .42s cubic-bezier(.2,.75,.2,1),border-color .25s ease,opacity .2s ease}
-.room-card{position:relative;z-index:1}
+.room-active-frame{position:absolute;top:0;left:0;z-index:4;pointer-events:none;border:1.5px solid var(--black);border-radius:32px;box-sizing:border-box;opacity:0;transform:translate3d(0,0,0);transition:transform .58s cubic-bezier(.16,1,.3,1),width .58s cubic-bezier(.16,1,.3,1),height .58s cubic-bezier(.16,1,.3,1),border-color .3s ease,opacity .25s ease;will-change:transform,width,height}.room-active-frame.is-on-dark{border-color:var(--white)}
+.room-card{position:relative;z-index:1}.room-card::after{content:'';position:absolute;inset:0;border:1px solid transparent;border-radius:31px;pointer-events:none;transition:border-color .22s ease,transform .22s ease}.room-card:hover::after{border-color:rgba(0,0,0,.2)}.room-card-dark:hover::after{border-color:rgba(255,255,255,.28)}
 .room-card-active,.room-card-active-dark,.room-card-active-yellow{outline:none}
 .room-card:active{transform:translateY(-1px) scale(.985)}
 .room-card-dark:active{transform:translateY(-1px) scale(.985)}
@@ -206,3 +218,5 @@ html{scrollbar-color:var(--black) var(--canvas);scrollbar-width:thin}
   .room-active-frame{transition:none}
   .scroll-progress span{transition:none}
 }
+
+@media (prefers-reduced-motion:reduce){.hero-copy,.hero-object{opacity:1;transform:none;filter:none;animation:none!important}.reveal{opacity:1;transform:none!important;filter:none!important;clip-path:none!important;transition:none}.booking-panel,.nav-links.is-open{animation:none}}
