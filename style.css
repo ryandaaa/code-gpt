@@ -37,7 +37,7 @@ button,input{font:inherit}
   box-shadow:0 8px 30px rgba(0,0,0,.06);
   pointer-events:auto
 }
-.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;letter-spacing:-.02em;white-space:nowrap}
+.brand{font-family:'Allura',cursive;font-size:34px;line-height:1;white-space:nowrap;letter-spacing:.01em}
 .brand-mark{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;background:var(--black);color:var(--white);font:400 11px/1 var(--mono)}
 .nav-links{display:flex;gap:24px;align-items:center;margin-left:auto}
 .nav-links a,.nav-toggle{font-size:14px;font-weight:500;color:var(--slate)}
@@ -119,8 +119,9 @@ button,input{font:inherit}
 .form-success{color:var(--slate)}
 .footer{background:var(--graphite);color:var(--white);padding:28px 0}
 .footer-inner{display:flex;align-items:center;gap:20px;justify-content:space-between}
-.footer-inner>div{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600}
+.footer-inner>div{display:flex;align-items:center;gap:10px}
 .footer .mono-label{color:var(--ash)}
+.footer-brand{font-family:'Allura',cursive;font-size:28px;line-height:1;color:var(--white)}
 @media (max-width:860px){
   .site-header{top:12px;height:64px;padding:0 14px}
   .nav-shell{position:relative;padding:10px 14px}
