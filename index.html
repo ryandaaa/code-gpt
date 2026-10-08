@@ -68,22 +68,22 @@
 
       <div class="room-grid">
         <span class="room-active-frame" aria-hidden="true"></span>
-        <article role="button" tabindex="0" class="room-card" :class="{ 'room-card-active': activeRoom==='The Long Table', 'room-card-expanded': expandedRoom==='The Long Table' }" @click="activeRoom='The Long Table';expandedRoom=expandedRoom==='The Long Table'?'':'The Long Table';$nextTick(()=>moveFrame($event.currentTarget))" @keydown.enter.prevent="$event.currentTarget.click()">
+        <article role="button" tabindex="0" class="room-card" :class="{ 'room-card-active': activeRoom==='The Long Table', 'room-card-expanded': expandedRoom==='The Long Table' }" @click="activeRoom='The Long Table';expandedRoom=expandedRoom==='The Long Table'?'':'The Long Table'" @keydown.enter.prevent="$event.currentTarget.click()">
           <div class="room-no">01</div><span class="mint-tag">FOCUS</span><h3>THE LONG<br>TABLE</h3>
           <p>Shared work surface. Sixteen chairs. One rule: headphones down when the bell rings.</p>
           <div class="room-meta"><span>08:00 — 20:00</span><span>16 SEATS</span></div>
         </article>
-        <article role="button" tabindex="0" class="room-card room-card-dark" :class="{ 'room-card-active-dark': activeRoom==='The Listening Room', 'room-card-expanded': expandedRoom==='The Listening Room' }" @click="activeRoom='The Listening Room';expandedRoom=expandedRoom==='The Listening Room'?'':'The Listening Room';$nextTick(()=>moveFrame($event.currentTarget))" @keydown.enter.prevent="$event.currentTarget.click()">
+        <article role="button" tabindex="0" class="room-card room-card-dark" :class="{ 'room-card-active-dark': activeRoom==='The Listening Room', 'room-card-expanded': expandedRoom==='The Listening Room' }" @click="activeRoom='The Listening Room';expandedRoom=expandedRoom==='The Listening Room'?'':'The Listening Room'" @keydown.enter.prevent="$event.currentTarget.click()">
           <div class="room-no">02</div><span class="mint-tag">LISTEN</span><h3>THE LISTENING<br>ROOM</h3>
           <p>Vinyl, printed magazines, and a speaker system that makes people stay longer than planned.</p>
           <div class="room-meta"><span>10:00 — 23:00</span><span>08 SEATS</span></div>
         </article>
-        <article role="button" tabindex="0" class="room-card" :class="{ 'room-card-active': activeRoom==='The Green Room', 'room-card-expanded': expandedRoom==='The Green Room' }" @click="activeRoom='The Green Room';expandedRoom=expandedRoom==='The Green Room'?'':'The Green Room';$nextTick(()=>moveFrame($event.currentTarget))" @keydown.enter.prevent="$event.currentTarget.click()">
+        <article role="button" tabindex="0" class="room-card" :class="{ 'room-card-active': activeRoom==='The Green Room', 'room-card-expanded': expandedRoom==='The Green Room' }" @click="activeRoom='The Green Room';expandedRoom=expandedRoom==='The Green Room'?'':'The Green Room'" @keydown.enter.prevent="$event.currentTarget.click()">
           <div class="room-no">03</div><span class="mint-tag">RESET</span><h3>THE GREEN<br>ROOM</h3>
           <p>Plants, bad sketches, sunlight. Designed for the exact moment your best idea isn't showing up.</p>
           <div class="room-meta"><span>ALL DAY</span><span>05 SEATS</span></div>
         </article>
-        <article role="button" tabindex="0" class="room-card room-card-yellow" :class="{ 'room-card-active-yellow': activeRoom==='The Archive', 'room-card-expanded': expandedRoom==='The Archive' }" @click="activeRoom='The Archive';expandedRoom=expandedRoom==='The Archive'?'':'The Archive';$nextTick(()=>moveFrame($event.currentTarget))" @keydown.enter.prevent="$event.currentTarget.click()">
+        <article role="button" tabindex="0" class="room-card room-card-yellow" :class="{ 'room-card-active-yellow': activeRoom==='The Archive', 'room-card-expanded': expandedRoom==='The Archive' }" @click="activeRoom='The Archive';expandedRoom=expandedRoom==='The Archive'?'':'The Archive'" @keydown.enter.prevent="$event.currentTarget.click()">
           <div class="room-no">04</div><span class="mint-tag">WANDER</span><h3>THE<br>ARCHIVE</h3>
           <p>Old journals, local maps, dead magazines. Nothing here is new, which is precisely the point.</p>
           <div class="room-meta"><span>09:00 — 19:00</span><span>01 RULE</span></div>
