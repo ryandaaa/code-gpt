@@ -295,3 +295,49 @@ html{scrollbar-color:var(--black) var(--canvas);scrollbar-width:thin}
   .rooms-panel{margin-top:-64px}
   .notes-panel{margin-top:-18px}
 }
+
+/* Intentional stacked composition */
+@media (min-width:861px){
+  .site-stage{display:block;padding:0 8px 10px}
+  .hero-panel.hero{
+    position:relative;
+    z-index:1;
+    min-height:980px;
+    padding-bottom:250px;
+  }
+  .rooms-panel{
+    position:relative;
+    z-index:5;
+    margin-top:-190px !important;
+    background:#f3efe5 !important;
+    border-radius:56px;
+  }
+  .rooms-panel .section-intro{
+    padding-top:10px;
+  }
+  .notes-panel{
+    position:relative;
+    z-index:6;
+    margin-top:-34px !important;
+  }
+}
+@media (max-width:860px){
+  .site-stage{display:block;padding:0 6px 8px}
+  .hero-panel.hero{
+    position:relative;
+    z-index:1;
+    min-height:860px;
+    padding-bottom:180px;
+  }
+  .rooms-panel{
+    position:relative;
+    z-index:5;
+    margin-top:-100px !important;
+    background:#f3efe5 !important;
+  }
+  .notes-panel{
+    position:relative;
+    z-index:6;
+    margin-top:-24px !important;
+  }
+}
