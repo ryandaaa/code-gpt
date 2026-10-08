@@ -7,7 +7,7 @@
   <title>Common Ground — Rooms for ideas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Mono:wght@400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Barlow+Condensed:wght@500;600;700&family=DM+Mono:wght@400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link rel="stylesheet" href="style.css">
@@ -15,10 +15,7 @@
 <body x-data="{ menu:false, activeRoom:'The Long Table', email:'', sent:false }" class="min-h-screen overflow-x-hidden">
   <header class="site-header">
     <div class="nav-shell">
-      <a href="#top" class="brand" aria-label="Common Ground home">
-        <span class="brand-mark">CG</span>
-        <span>COMMON GROUND</span>
-      </a>
+      <a href="#top" class="brand" aria-label="Common Ground home">Common Ground</a>
       <button class="nav-toggle" @click="menu=!menu" :aria-expanded="menu.toString()" aria-label="Toggle navigation">MENU</button>
       <nav class="nav-links" :class="{ 'is-open': menu }">
         <a href="#rooms" @click="menu=false">Rooms</a>
@@ -157,7 +154,7 @@
 
   <footer class="footer">
     <div class="page-wrap footer-inner">
-      <div><span class="brand-mark">CG</span> <span>COMMON GROUND</span></div>
+      <div><a href="#top" class="footer-brand">Common Ground</a></div>
       <span class="mono-label">A FICTIONAL PLACE / MADE FOR THIS DEMO</span>
       <a href="#top" class="text-link">Back to top ↑</a>
     </div>
