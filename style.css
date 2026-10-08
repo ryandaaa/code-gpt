@@ -187,3 +187,22 @@ button,input{font:inherit}
 .reveal.reveal-scale{transform:scale(.96)}
 .reveal.is-visible{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none!important;transition:none}}
+
+/* Scroll chrome */
+html{scrollbar-color:var(--black) var(--canvas);scrollbar-width:thin}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--canvas)}
+::-webkit-scrollbar-thumb{background:var(--black);border:3px solid var(--canvas);border-radius:999px}
+::-webkit-scrollbar-thumb:hover{background:var(--graphite)}
+.scroll-progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:100;background:transparent;pointer-events:none}
+.scroll-progress span{display:block;width:0;height:100%;background:var(--black);transform-origin:left center;transition:width .08s linear}
+.room-grid{position:relative}
+.room-active-frame{position:absolute;top:0;left:0;z-index:5;pointer-events:none;border:1.5px solid var(--black);border-radius:32px;box-sizing:border-box;transition:transform .42s cubic-bezier(.2,.75,.2,1),width .42s cubic-bezier(.2,.75,.2,1),height .42s cubic-bezier(.2,.75,.2,1),border-color .25s ease,opacity .2s ease}
+.room-card{position:relative;z-index:1}
+.room-card-active,.room-card-active-dark,.room-card-active-yellow{outline:none}
+.room-card:active{transform:translateY(-1px) scale(.985)}
+.room-card-dark:active{transform:translateY(-1px) scale(.985)}
+@media (prefers-reduced-motion:reduce){
+  .room-active-frame{transition:none}
+  .scroll-progress span{transition:none}
+}
