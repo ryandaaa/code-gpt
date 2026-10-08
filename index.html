@@ -13,17 +13,17 @@
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
-<body x-data="{ menu:false, activeRoom:'The Long Table', email:'', sent:false }" class="min-h-screen overflow-x-hidden">
+<body x-data="{menu:false,activeRoom:'The Long Table',expandedRoom:'',activeNote:0,showAllNotes:false,activeNav:'top',email:'',sent:false,bookingOpen:false,selectedTime:'09:00',notice:'',openNotice(message){this.notice=message;setTimeout(()=>this.notice='',2600)}}" @keydown.escape.window="bookingOpen=false" class="min-h-screen overflow-x-hidden">
   <header class="site-header">
     <div class="nav-shell">
       <a href="#top" class="brand" aria-label="Common Ground home">Common Ground</a>
       <button class="nav-toggle" @click="menu=!menu" :aria-expanded="menu.toString()" aria-label="Toggle navigation">MENU</button>
       <nav class="nav-links" :class="{ 'is-open': menu }">
-        <a href="#rooms" @click="menu=false">Rooms</a>
-        <a href="#notes" @click="menu=false">Field notes</a>
-        <a href="#visit" @click="menu=false">Visit</a>
+        <a href="#rooms" :class="{ 'nav-active': activeNav==='rooms' }" @click="menu=false;activeNav='rooms'">Rooms</a>
+        <a href="#notes" :class="{ 'nav-active': activeNav==='notes' }" @click="menu=false;activeNav='notes'">Field notes</a>
+        <a href="#visit" :class="{ 'nav-active': activeNav==='visit' }" @click="menu=false;activeNav='visit'">Visit</a>
       </nav>
-      <a href="#visit" class="btn btn-dark nav-cta">Book a seat</a>
+      <button type="button" class="btn btn-dark nav-cta" @click="bookingOpen=true;menu=false">Book a seat</button>
     </div>
   </header>
 
@@ -33,12 +33,12 @@
         <p class="mono-label">01 / A QUIET PLACE FOR LOUD IDEAS</p>
         <h1>MAKE<br>ROOM<br>FOR<br>THOUGHT.</h1>
         <div class="hero-bottom">
-          <span class="mint-tag">NEW / OCTOBER 2026</span>
+          <button type="button" class="mint-tag interactive-chip" @click="openNotice('October residency: the house is open for curious people.')">NEW / OCTOBER 2026 <span aria-hidden="true">↗</span></button>
           <p>Common Ground is a fictional members' house for people who make things, question things, and occasionally need a table that stays quiet.</p>
         </div>
       </div>
 
-      <div class="hero-object" aria-label="Editorial still life">
+      <div class="hero-object" aria-label="Editorial still life" data-parallax>
         <button type="button" class="object-card object-card-back object-interactive" @click="openNotice('Arrival logged at 12:47. The quiet starts here.')">
           <span>12:47</span>
           <small>ARRIVAL</small>
@@ -49,13 +49,13 @@
           <div class="object-line"></div>
           <div class="object-note">A ROOM<br>WITHOUT<br>THE NOISE</div>
         </button>
-        <button type="button" class="object-card object-card-front object-interactive">
+        <button type="button" class="object-card object-card-front object-interactive" @click="openNotice('Table 04 is currently free.')">
           <span>04</span>
           <small>TABLES</small>
-        </div>
-        <span class="burst burst-a">◎</span>
-        <span class="burst burst-b">+</span>
-        <span class="burst burst-c">11°</span>
+        </button>
+        <button type="button" class="burst burst-a" @click="openNotice('Focus signal received.')">◎</button>
+        <button type="button" class="burst burst-b" @click="openNotice('Yes, that is a plus sign.')">+</button>
+        <button type="button" class="burst burst-c" @click="openNotice('11°: perfect window weather.')">11°</button>
       </div>
     </section>
 
@@ -67,41 +67,31 @@
       </div>
 
       <div class="room-grid">
-        <article class="room-card" :class="{ 'room-card-active': activeRoom === 'The Long Table' }" @click="activeRoom='The Long Table'">
-          <div class="room-no">01</div>
-          <span class="mint-tag">FOCUS</span>
-          <h3>THE LONG<br>TABLE</h3>
+        <article role="button" tabindex="0" class="room-card" :class="{ 'room-card-active': activeRoom==='The Long Table', 'room-card-expanded': expandedRoom==='The Long Table' }" @click="activeRoom='The Long Table';expandedRoom=expandedRoom==='The Long Table'?'':'The Long Table'" @keydown.enter.prevent="$event.currentTarget.click()">
+          <div class="room-no">01</div><span class="mint-tag">FOCUS</span><h3>THE LONG<br>TABLE</h3>
           <p>Shared work surface. Sixteen chairs. One rule: headphones down when the bell rings.</p>
           <div class="room-meta"><span>08:00 — 20:00</span><span>16 SEATS</span></div>
         </article>
-        <article class="room-card room-card-dark" :class="{ 'room-card-active-dark': activeRoom === 'The Listening Room' }" @click="activeRoom='The Listening Room'">
-          <div class="room-no">02</div>
-          <span class="mint-tag">LISTEN</span>
-          <h3>THE LISTENING<br>ROOM</h3>
+        <article role="button" tabindex="0" class="room-card room-card-dark" :class="{ 'room-card-active-dark': activeRoom==='The Listening Room', 'room-card-expanded': expandedRoom==='The Listening Room' }" @click="activeRoom='The Listening Room';expandedRoom=expandedRoom==='The Listening Room'?'':'The Listening Room'" @keydown.enter.prevent="$event.currentTarget.click()">
+          <div class="room-no">02</div><span class="mint-tag">LISTEN</span><h3>THE LISTENING<br>ROOM</h3>
           <p>Vinyl, printed magazines, and a speaker system that makes people stay longer than planned.</p>
           <div class="room-meta"><span>10:00 — 23:00</span><span>08 SEATS</span></div>
         </article>
-        <article class="room-card" :class="{ 'room-card-active': activeRoom === 'The Green Room' }" @click="activeRoom='The Green Room'">
-          <div class="room-no">03</div>
-          <span class="mint-tag">RESET</span>
-          <h3>THE GREEN<br>ROOM</h3>
+        <article role="button" tabindex="0" class="room-card" :class="{ 'room-card-active': activeRoom==='The Green Room', 'room-card-expanded': expandedRoom==='The Green Room' }" @click="activeRoom='The Green Room';expandedRoom=expandedRoom==='The Green Room'?'':'The Green Room'" @keydown.enter.prevent="$event.currentTarget.click()">
+          <div class="room-no">03</div><span class="mint-tag">RESET</span><h3>THE GREEN<br>ROOM</h3>
           <p>Plants, bad sketches, sunlight. Designed for the exact moment your best idea isn't showing up.</p>
           <div class="room-meta"><span>ALL DAY</span><span>05 SEATS</span></div>
         </article>
-        <article class="room-card room-card-yellow" :class="{ 'room-card-active-yellow': activeRoom === 'The Archive' }" @click="activeRoom='The Archive'">
-          <div class="room-no">04</div>
-          <span class="mint-tag">WANDER</span>
-          <h3>THE<br>ARCHIVE</h3>
+        <article role="button" tabindex="0" class="room-card room-card-yellow" :class="{ 'room-card-active-yellow': activeRoom==='The Archive', 'room-card-expanded': expandedRoom==='The Archive' }" @click="activeRoom='The Archive';expandedRoom=expandedRoom==='The Archive'?'':'The Archive'" @keydown.enter.prevent="$event.currentTarget.click()">
+          <div class="room-no">04</div><span class="mint-tag">WANDER</span><h3>THE<br>ARCHIVE</h3>
           <p>Old journals, local maps, dead magazines. Nothing here is new, which is precisely the point.</p>
           <div class="room-meta"><span>09:00 — 19:00</span><span>01 RULE</span></div>
         </article>
       </div>
 
-      <div class="selection-note">
-        <span class="mono-label">CURRENTLY VIEWING</span>
-        <strong x-text="activeRoom"></strong>
-        <span class="selection-dot"></span>
-      </div>
+      <button type="button" class="selection-note" @click="openNotice('Selected room: '+activeRoom)">
+        <span class="mono-label">CURRENTLY VIEWING</span><strong x-text="activeRoom"></strong><span class="selection-dot"></span>
+      </button>
     </section>
 
     <section id="notes" class="dark-section">
@@ -113,11 +103,12 @@
         <div class="notes-copy">
           <p>We collect small observations from the house and leave them on the wall.</p>
           <div class="note-list">
-            <div><span>OCT 03</span><strong>Most ideas arrive five minutes after you stop chasing them.</strong></div>
-            <div><span>SEP 27</span><strong>A window is still a useful piece of software.</strong></div>
-            <div><span>SEP 19</span><strong>Bring less. Notice more.</strong></div>
+            <button type="button" class="note-row" @click="activeNote=activeNote===1?0:1"><span>OCT 03</span><strong>Most ideas arrive five minutes after you stop chasing them.</strong><i x-text="activeNote===1?'−':'+'"></i><small x-show="activeNote===1">A note from the long table: stop refreshing the page. Make the thing.</small></button>
+            <button type="button" class="note-row" @click="activeNote=activeNote===2?0:2"><span>SEP 27</span><strong>A window is still a useful piece of software.</strong><i x-text="activeNote===2?'−':'+'"></i><small x-show="activeNote===2">The best room in the house changes every thirty minutes with the sun.</small></button>
+            <button type="button" class="note-row" @click="activeNote=activeNote===3?0:3"><span>SEP 19</span><strong>Bring less. Notice more.</strong><i x-text="activeNote===3?'−':'+'"></i><small x-show="activeNote===3">There is no productivity trick hidden here. Just fewer tabs.</small></button>
           </div>
-          <a href="#visit" class="text-link invert-link">Read the whole notebook ↗</a>
+          <button type="button" class="text-link invert-link" @click="showAllNotes=!showAllNotes"><span x-text="showAllNotes?'Close the whole notebook ↑':'Read the whole notebook ↗'"></span></button>
+          <p x-show="showAllNotes" class="notebook-extra">The house has no productivity philosophy. It has tables, weather, music, paper, and enough time to think badly before thinking well.</p>
         </div>
       </div>
     </section>
@@ -128,10 +119,7 @@
           <p class="mono-label">04 / COME BY</p>
           <h2>YOU DON'T<br>NEED AN<br>INVITATION.</h2>
           <p class="visit-lede">Drop in for a coffee, bring a half-finished thought, or sit here long enough for one to become a plan.</p>
-          <div class="address">
-            <span>17 LOWELL STREET</span>
-            <span>PEKANBARU / 10127</span>
-          </div>
+          <div class="address"><span>17 LOWELL STREET</span><span>PEKANBARU / 10127</span></div>
         </div>
         <div class="visit-right">
           <div class="hours">
@@ -139,12 +127,9 @@
             <div><span>SATURDAY</span><strong>10:00 — 18:00</strong></div>
             <div><span>SUNDAY</span><strong>OFF THE GRID</strong></div>
           </div>
-          <form @submit.prevent="sent=true; email=''" class="signup-form">
+          <form @submit.prevent="sent=true;email='';openNotice('You are on the list.')" class="signup-form">
             <label for="email">A NOTE, OCCASIONALLY</label>
-            <div class="signup-row">
-              <input id="email" type="email" x-model="email" placeholder="you@example.com" required>
-              <button type="submit" class="btn btn-dark">Join</button>
-            </div>
+            <div class="signup-row"><input id="email" type="email" x-model="email" placeholder="you@example.com" required><button type="submit" class="btn btn-dark">Join</button></div>
             <p x-show="!sent" class="form-meta">One email when the house has something worth leaving the house for.</p>
             <p x-show="sent" class="form-meta form-success">You're on the list. We'll keep it human.</p>
           </form>
@@ -153,6 +138,21 @@
     </section>
   </main>
 
+  <div x-show="notice" x-transition.opacity class="toast" x-text="notice"></div>
+  <div x-show="bookingOpen" x-transition.opacity class="booking-overlay" @click.self="bookingOpen=false">
+    <div class="booking-panel" @click.stop>
+      <div class="booking-head"><div><p class="mono-label">QUICK BOOKING</p><h3>CLAIM A<br>GOOD HOUR.</h3></div><button type="button" class="icon-close" @click="bookingOpen=false" aria-label="Close booking">×</button></div>
+      <p class="booking-copy">Choose a starting time. It is a mockup, so nobody will actually judge your calendar.</p>
+      <div class="time-grid">
+        <button type="button" :class="{ 'time-active': selectedTime==='09:00' }" @click="selectedTime='09:00'">09:00</button>
+        <button type="button" :class="{ 'time-active': selectedTime==='11:30' }" @click="selectedTime='11:30'">11:30</button>
+        <button type="button" :class="{ 'time-active': selectedTime==='14:00' }" @click="selectedTime='14:00'">14:00</button>
+        <button type="button" :class="{ 'time-active': selectedTime==='16:30' }" @click="selectedTime='16:30'">16:30</button>
+      </div>
+      <button type="button" class="btn btn-dark booking-confirm" @click="bookingOpen=false;openNotice('Seat reserved for '+selectedTime+'.')">Reserve <span x-text="selectedTime"></span> ↗</button>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="page-wrap footer-inner">
       <div><a href="#top" class="footer-brand">Common Ground</a></div>
@@ -160,7 +160,6 @@
       <a href="#top" class="text-link">Back to top ↑</a>
     </div>
   </footer>
-
   <script src="script.js"></script>
 </body>
 </html>
