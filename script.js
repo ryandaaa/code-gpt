@@ -70,6 +70,18 @@ document.addEventListener('DOMContentLoaded', () => {
     revealItems.forEach(el => observer.observe(el));
   }
 
+
+  const scrollProgress = document.getElementById('scrollProgress');
+  const updateScrollProgress = () => {
+    if (!scrollProgress) return;
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+    scrollProgress.style.width = progress + '%';
+  };
+  updateScrollProgress();
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  window.addEventListener('resize', updateScrollProgress);
+
   const sections = [...document.querySelectorAll('main section[id]')];
   const navLinks = [...document.querySelectorAll('.nav-links a')];
   const setActiveNav = () => {
@@ -82,6 +94,17 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   setActiveNav();
   window.addEventListener('scroll', setActiveNav, { passive: true });
+
+
+  const roomGrid = document.querySelector('.room-grid');
+  if (roomGrid && 'ResizeObserver' in window) {
+    const syncActiveFrame = () => {
+      const active = roomGrid.querySelector('.room-card-active, .room-card-active-dark, .room-card-active-yellow');
+      if (!active) return;
+      active.click();
+    };
+    new ResizeObserver(() => syncActiveFrame()).observe(roomGrid);
+  }
 
   document.querySelectorAll('.btn, .mint-tag, .burst, .time-grid button, .icon-close').forEach(button => {
     button.addEventListener('pointerdown', () => {
