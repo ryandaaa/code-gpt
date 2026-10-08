@@ -30,6 +30,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Section panels approach the viewport from depth, not from below.
+  const panels = [...document.querySelectorAll('.site-stage > .section-panel')];
+  const revealPanel = panel => panel.classList.add('is-panel-visible');
+
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    panels.forEach(revealPanel);
+  } else {
+    const panelObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        revealPanel(entry.target);
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -12% 0px' });
+    panels.forEach((panel, index) => {
+      if (index === 0) revealPanel(panel);
+      else panelObserver.observe(panel);
+    });
+  }
+
   // Scroll reveals: staggered, one-shot, and motion-safe.
   const revealGroups = [
     ['.section-intro > *', 'up'],
@@ -99,7 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const roomGrid = document.querySelector('.room-grid');
   const activeFrame = roomGrid?.querySelector('.room-active-frame');
-  const positionRoomFrame = (card) => {
+
+  const positionRoomFrame = card => {
     if (!roomGrid || !activeFrame || !card) return;
     const gridRect = roomGrid.getBoundingClientRect();
     const cardRect = card.getBoundingClientRect();
@@ -109,28 +130,31 @@ document.addEventListener('DOMContentLoaded', () => {
     activeFrame.classList.toggle('is-on-dark', card.classList.contains('room-card-dark'));
     activeFrame.style.opacity = '1';
   };
+
   if (roomGrid && activeFrame) {
     const initialRoom = roomGrid.querySelector('.room-card-active, .room-card-active-dark, .room-card-active-yellow');
     requestAnimationFrame(() => positionRoomFrame(initialRoom));
+
     roomGrid.addEventListener('click', event => {
       const card = event.target.closest('.room-card');
-      if (!card || !roomGrid.contains(card)) return;
+      if (!card) return;
       requestAnimationFrame(() => positionRoomFrame(card));
     });
+
     roomGrid.addEventListener('keydown', event => {
       if (event.key !== 'Enter') return;
       const card = event.target.closest('.room-card');
       if (!card) return;
       requestAnimationFrame(() => positionRoomFrame(card));
     });
-    if ('ResizeObserver' in window) new ResizeObserver(() => {
+
+    const resizeFrame = () => {
       const current = roomGrid.querySelector('.room-card-active, .room-card-active-dark, .room-card-active-yellow');
       positionRoomFrame(current);
-    }).observe(roomGrid);
-    window.addEventListener('resize', () => {
-      const current = roomGrid.querySelector('.room-card-active, .room-card-active-dark, .room-card-active-yellow');
-      positionRoomFrame(current);
-    });
+    };
+    if ('ResizeObserver' in window) new ResizeObserver(resizeFrame).observe(roomGrid);
+    window.addEventListener('resize', resizeFrame);
+    window.addEventListener('scroll', resizeFrame, { passive: true });
   }
 
   document.querySelectorAll('.btn, .mint-tag, .burst, .time-grid button, .icon-close').forEach(button => {
