@@ -97,14 +97,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   const roomGrid = document.querySelector('.room-grid');
-  if (roomGrid && 'ResizeObserver' in window) {
-    const syncActiveFrame = () => {
-      const active = roomGrid.querySelector('.room-card-active, .room-card-active-dark, .room-card-active-yellow');
-      if (!active) return;
-      active.click();
-    };
-    new ResizeObserver(() => syncActiveFrame()).observe(roomGrid);
-  }
+  const activeFrame = roomGrid?.querySelector('.room-active-frame');
+  const syncActiveFrame = () => {
+    if (!roomGrid || !activeFrame) return;
+    const active = roomGrid.querySelector('.room-card-active, .room-card-active-dark, .room-card-active-yellow');
+    if (!active) return;
+    const gridRect = roomGrid.getBoundingClientRect();
+    const cardRect = active.getBoundingClientRect();
+    activeFrame.style.width = cardRect.width + 'px';
+    activeFrame.style.height = cardRect.height + 'px';
+    activeFrame.style.transform = 'translate3d(' + (cardRect.left - gridRect.left) + 'px,' + (cardRect.top - gridRect.top) + 'px,0)';
+    activeFrame.style.borderColor = active.classList.contains('room-card-dark') ? '#fff' : '#000';
+    activeFrame.style.opacity = '1';
+  };
+  syncActiveFrame();
+  if (roomGrid && 'ResizeObserver' in window) new ResizeObserver(syncActiveFrame).observe(roomGrid);
+  window.addEventListener('resize', syncActiveFrame);
 
   document.querySelectorAll('.btn, .mint-tag, .burst, .time-grid button, .icon-close').forEach(button => {
     button.addEventListener('pointerdown', () => {
